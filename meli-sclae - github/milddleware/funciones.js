@@ -54,8 +54,11 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
             }).then(  response  => {
                return response.data
            },error =>{return error})
+           
+           if(typeof datos_fatu=== "undefined" || typeof datos_fatu=== "NULL"){console.log("sin datos de facturacion")}else{
            if(typeof datos_fatu.billing_info=== "undefined" || typeof datos_fatu.billing_info=== "NULL"){console.log("sin billing_info ")}else{
            if (typeof datos_fatu.billing_info.doc_number === "undefined" || typeof datos_fatu.billing_info.doc_number=== "NULL") {}else{
+           try{
             let  infoadicional,STREET_NAME, ZIP_CODE,STATE_NAME,STREET_NUMBER, CITY_NAME,COMMENT,TAXPAYER_TYPE_ID, BUSINESS_NAME, FIRST_NAME, LAST_NAME
             let order_ide=order_id
             let DOC_TYPE=datos_fatu.billing_info.doc_type
@@ -80,8 +83,10 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
               //entro a grabar info, solo graba para ordenes nueva o que no tenieran registros, filtro en sp
               let datosfaturacion=await InsertaInformacionFacturacion(STREET_NAME, ZIP_CODE, STATE_NAME, STREET_NUMBER, CITY_NAME,DOC_TYPE, COMMENT, doc_number,TAXPAYER_TYPE_ID, BUSINESS_NAME, FIRST_NAME, LAST_NAME, order_ide)
               //console.log(datosfaturacion)
+            }catch(error){console.log(error)}
             }
           }
+        }
           //continu aqui antes de break
     //para ir a buscar la info del envio con el id de la orden o el id del envio  
               //solicita la informacion del envio 
@@ -92,8 +97,10 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
                }).then(  response  => {
                 return response.data
             },error =>{return error})
+            if(typeof datos_envio==='undefined'|| typeof datos_envio=="NULL"){console.log("Sin datos de envio")}else{
             if(typeof datos_envio.id==='undefined'|| typeof datos_envio.id==="NULL"){}else{
               let SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment
+             try{
               SHIPMENTID=datos_envio.id
               orderid=datos_envio.order_id
               addressline=datos_envio.receiver_address.address_line
@@ -110,7 +117,9 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
              // console.log(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment)
               let result= await InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment)
              // console.log(result)
+             }catch(error){console.log(error)}
             }
+          }
         
         
     }else{}
