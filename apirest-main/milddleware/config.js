@@ -2,7 +2,7 @@
 var config = {
 	user: 'sa',
 	password: 'Monorata',
-	server: 'charkomiguel.no-ip.org',
+	server: '191.97.237.83',//'charkomiguel.no-ip.org',
 	database: 'melitest',
 	site_id:'MLA',
 	api_root_url: 'https://api.mercadolibre.com',

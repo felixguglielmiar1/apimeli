@@ -168,7 +168,7 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
   //let ano=fechayhora.getFullYear()
   //let horadeldia=fechayhora.getHours()
   //if(horadeldia<10){hora='0'+horadeldia}else{hora=horadeldia}
-  var fechaActual=ano+'-'+mes+'-'+dia+'T'+hora+':'+minutos+':00.000-04:00'
+  var fechaActual=ano+'-'+mes+'-'+dia+'T'+hora+':00:00.000-04:00'
   return  fechaActual 
   }
 //funcion que actuliza el token, si este esta por vencer
