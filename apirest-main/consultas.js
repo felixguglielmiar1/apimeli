@@ -580,7 +580,7 @@ async function  InsertaInformacionFacturacion(STREETNAME, ZIPCODE, STATENAME, ST
                                     }
 
 
-async function  InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment){  
+async function  InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment,logistic_typee){  
 
                                       const result = await rest.rest.executeStoredProcedure('SP_ORDENES_ENVIOS', null, {
                                         SHIPMENT_ID: SHIPMENTID,
@@ -595,7 +595,8 @@ async function  InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetna
                                         neighborhood:neighborhood_s,
                                         municipality:municipality_s,
                                         date_created:datecreated,
-                                        status: statusshipment
+                                        status: statusshipment,
+                                        logistic_type: logistic_typee
                                     });
                                     return result
                                                 }

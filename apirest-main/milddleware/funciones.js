@@ -99,8 +99,9 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
             },error =>{return error})
             if(typeof datos_envio==='undefined'|| typeof datos_envio=="NULL"){console.log("Sin datos de envio")}else{
             if(typeof datos_envio.id==='undefined'|| typeof datos_envio.id==="NULL"){}else{
-              let SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment
+              let SHIPMENTID,orderid,addessline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment,logistic_typee
              try{
+               
               SHIPMENTID=datos_envio.id
               orderid=datos_envio.order_id
               addressline=datos_envio.receiver_address.address_line
@@ -114,8 +115,9 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
               municipality_s=datos_envio.receiver_address.municipality.name
               datecreated=datos_envio.date_created
               statusshipment=datos_envio.status
+              logistic_typee=datos_envio.logistic_type
              // console.log(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment)
-              let result= await InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment)
+              let result= await InsertaInformacionEnvios(SHIPMENTID,orderid,addressline,streetname,streetnumber,comment_s,zipcode,city_s,stateshipment,neighborhood_s,  municipality_s,datecreated,statusshipment,logistic_typee)
              // console.log(result)
              }catch(error){console.log(error)}
             }
@@ -125,7 +127,7 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
     }else{}
     
        
-    }
+    } 
     }///termina el for anterion pero sigue dentro de la comprobacion de que no sea undefined 
     console.log(grabaFechaActualizacion,ordenesRecorridas,ordernesGuardadas)
       if(grabaFechaActualizacion==='s'){
@@ -168,7 +170,7 @@ async function  recorreJSON(resultado,fechaConsulta,tokenc,grabaFechaActualizaci
   //let ano=fechayhora.getFullYear()
   //let horadeldia=fechayhora.getHours()
   //if(horadeldia<10){hora='0'+horadeldia}else{hora=horadeldia}
-  var fechaActual=ano+'-'+mes+'-'+dia+'T'+hora+':00:00.000-04:00'
+  var fechaActual=ano+'-'+mes+'-'+dia+'T'+hora+':'+minutos+':00.000-04:00'
   return  fechaActual 
   }
 //funcion que actuliza el token, si este esta por vencer
